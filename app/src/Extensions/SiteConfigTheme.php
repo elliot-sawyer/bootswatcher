@@ -1,9 +1,13 @@
 <?php
 namespace Cashware\Bootswatcher;
 
+use SilverStripe\Control\HTTPRequest;
+use SilverStripe\Core\Injector\Injector;
+use SilverStripe\Dev\TaskRunner;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\DataExtension;
+use SilverStripe\ORM\DB;
 use SilverStripe\View\Requirements;
 
 class SiteConfigTheme extends DataExtension
@@ -22,5 +26,22 @@ class SiteConfigTheme extends DataExtension
     public function BootswatchTheme()
     {
         Requirements::themedCSS("dist/css/".$this->owner->Theme.'.min');
+    }
+
+    public function requireDefaultRecords()
+    {
+        $task = Injector::inst()->create(BootswatchDownloader::class);
+        $task->run([]);
+    }
+
+    public function onBeforeWrite()
+    {
+        $themes = array_keys(BootswatchDownloader::config()->bootswatch_themes);
+        shuffle($themes);
+        $theme = array_shift($themes);
+
+        if($this->owner->Theme == 'default') {
+            $this->owner->Theme = $theme;
+        }
     }
 }
