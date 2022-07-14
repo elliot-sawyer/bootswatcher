@@ -5,13 +5,11 @@
     "require": {
         "php": "^7.1 || ^8",
         "silverstripe/recipe-plugin": "^1.2",
-        "silverstripe/recipe-cms": "~4.9.0@stable",
-        "silverstripe/login-forms": "~4.5.0@stable",
+        "silverstripe/recipe-cms": "~4.11.0@stable",
+        "silverstripe/login-forms": "~4.6.0@stable",
         "guzzlehttp/guzzle": "^7.4"
     },
     "require-dev": {
-        "sminnee/phpunit": "^5.7",
-        "sminnee/phpunit-mock-objects": "^3.4.5",
         "larapack/dd": "^1.1"
     },
     "extra": {
@@ -34,7 +32,12 @@
         ]
     },
     "config": {
-        "process-timeout": 600
+        "process-timeout": 600,
+        "allow-plugins": {
+            "composer/installers": true,
+            "silverstripe/recipe-plugin": true,
+            "silverstripe/vendor-plugin": true
+        }
     },
     "prefer-stable": true,
     "minimum-stability": "dev"
