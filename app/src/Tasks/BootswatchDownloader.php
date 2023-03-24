@@ -60,6 +60,8 @@ class BootswatchDownloader extends BuildTask
                 . $theme
                 . '.min.css';
 
+            if(file_exists($filename)) continue;
+            
             DB::alteration_message('Downloading '.$name.' to '.$filename);
 
             $response = $client->request('GET', $url, [

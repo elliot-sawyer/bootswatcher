@@ -1,31 +1,13 @@
-## Overview
+# Bootswatcher Silverstripe project
 
-[![Build Status](https://api.travis-ci.com/silverstripe/silverstripe-installer.svg?branch=4)](https://travis-ci.com/silverstripe/silverstripe-installer)
+Configurable Silverstripe theme using pre-made Bootswatch themes, which uses the most recent version of Bootstrap
 
-Base project folder for a SilverStripe ([http://silverstripe.org](http://silverstripe.org)) installation. Required modules are installed via [http://github.com/silverstripe/recipe-cms](http://github.com/silverstripe/recipe-cms). For information on how to change the dependencies in a recipe, please have a look at [https://github.com/silverstripe/recipe-plugin](https://github.com/silverstripe/recipe-plugin). In addition, installer includes [theme/simple](https://github.com/silverstripe-themes/silverstripe-simple) as a default theme.
+## Setup
 
-## Installation ##
+`composer create-project elliot-sawyer/bootswatcher`
 
-`composer create-project silverstripe/installer my-app`
+Silverstripe 4 support will follow the 1.x tags.  When 5 support exists, the major version will be 2.x.  A more robust branching strategy should be expected soon.
 
-See [Getting Started](https://docs.silverstripe.org/en/4/getting_started/) for more information.
+## Usage
 
-## Bugtracker ##
-
-Bugs are tracked on github.com ([framework issues](https://github.com/silverstripe/silverstripe-framework/issues),
-[cms issues](https://github.com/silverstripe/silverstripe-cms/issues)).
-Please read our [issue reporting guidelines](https://docs.silverstripe.org/en/4/contributing/issues_and_bugs/).
-
-## Development and Contribution ##
-
-If you would like to make changes to the SilverStripe core codebase, we have an extensive [guide to contributing code](https://docs.silverstripe.org/en/4/contributing/code/).
-
-## Links ##
-
- * [Changelogs](https://docs.silverstripe.org/en/4/changelogs/)
- * [Bugtracker: Framework](https://github.com/silverstripe/silverstripe-framework/issues)
- * [Bugtracker: CMS](https://github.com/silverstripe/silverstripe-cms/issues)
- * [Bugtracker: Installer](https://github.com/silverstripe/silverstripe-installer/issues)
- * [Forums](http://silverstripe.org/forums)
- * [Developer Mailinglist](https://groups.google.com/forum/#!forum/silverstripe-dev)
- * [License](./LICENSE)
+When running a dev/build, the latest themes will be downloaded from the Bootswatch CDN.  Once downloaded, you can visit /admin/settings and select the Theme using the Themes tab
