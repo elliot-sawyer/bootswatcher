@@ -39,6 +39,11 @@ class BootswatchDownloader extends BuildTask
     ];
 
     public function run($request) {
+        $this->getCSS();
+        $this->getJS();
+    }
+
+    public function getCSS() {
         foreach($this->config()->bootswatch_themes as $theme => $name) {
             $client = new Client();
             if($theme == 'default') {
@@ -60,11 +65,13 @@ class BootswatchDownloader extends BuildTask
                 . $theme
                 . '.min.css';
 
+            if(file_exists($filename)) continue;
+
             DB::alteration_message('Downloading '.$name.' to '.$filename);
 
             $response = $client->request('GET', $url, [
                 'headers' => [
-                    'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:94.0) Gecko/20100101 Firefox/94.0'
+                    'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:94.0) Gecko/20100101 Firefox/111.0'
                 ]
             ]);
 
@@ -74,6 +81,43 @@ class BootswatchDownloader extends BuildTask
                     if(is_dir($fileFolder)) {
                         file_put_contents($filename, $body);
                     }
+                }
+            }
+        }
+    }
+
+    public function getJS()
+    {
+        $client = new Client();
+        $url = 'https://cdn.jsdelivr.net/npm/bootstrap@5/dist/js/bootstrap.bundle.min.js';
+            $fileFolder = THEMES_PATH
+            . DIRECTORY_SEPARATOR
+            . 'bootswatcher'
+            . DIRECTORY_SEPARATOR
+            . 'dist'
+            . DIRECTORY_SEPARATOR
+            . 'js';
+
+        $filename = $fileFolder
+            . DIRECTORY_SEPARATOR
+            . 'bootstrap.bundle.min.js';
+
+        if(file_exists($filename)) return;
+
+        DB::alteration_message('Downloading '.$filename);
+
+        $response = $client->request('GET', $url, [
+            'headers' => [
+                'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:94.0) Gecko/20100101 Firefox/111.0'
+            ]
+        ]);
+
+        if($response && $response->getStatusCode() == 200) {
+            $body = (string) $response->getBody();
+            if($body) {
+                @mkdir($fileFolder);
+                if(is_dir($fileFolder)) {
+                    file_put_contents($filename, $body);
                 }
             }
         }

@@ -3,5 +3,13 @@
 /vendor/
 /_resources/
 /public/_resources/
-/public/assets/*
+/public/assets/
 /.idea
+/.graphql-generated
+public/_graphql
+/themes/bootswatcher/dist/css/*.min.css
+/themes/bootswatcher/dist/js/*.min.js
+
+/data
+/bin
+/logs

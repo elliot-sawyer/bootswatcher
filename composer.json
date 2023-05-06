@@ -3,18 +3,17 @@
     "type": "silverstripe-recipe",
     "description": "Silverstripe project with Bootswatch themes preinstalled",
     "require": {
-        "php": "^7.1 || ^8",
-        "silverstripe/recipe-plugin": "^1.2",
-        "silverstripe/recipe-cms": "~4.11.0@stable",
-        "silverstripe/login-forms": "~4.6.0@stable",
-        "guzzlehttp/guzzle": "^7.4"
+        "php": "^8",
+        "silverstripe/recipe-cms": "5.0.0",
+        "guzzlehttp/guzzle": "^7"
     },
     "require-dev": {
         "larapack/dd": "^1.1"
     },
     "extra": {
         "expose": [
-            "themes/bootswatcher/dist/css"
+            "themes/bootswatcher/dist/css",
+            "themes/bootswatcher/dist/js"
         ],
         "resources-dir": "_resources",
         "project-files-installed": [
