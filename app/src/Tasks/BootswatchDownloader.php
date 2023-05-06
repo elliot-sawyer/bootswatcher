@@ -78,6 +78,7 @@ class BootswatchDownloader extends BuildTask
             if($response && $response->getStatusCode() == 200) {
                 $body = (string) $response->getBody();
                 if($body) {
+                    @mkdir($fileFolder, 0777, true);
                     if(is_dir($fileFolder)) {
                         file_put_contents($filename, $body);
                     }
@@ -115,7 +116,7 @@ class BootswatchDownloader extends BuildTask
         if($response && $response->getStatusCode() == 200) {
             $body = (string) $response->getBody();
             if($body) {
-                @mkdir($fileFolder);
+                @mkdir($fileFolder, 0777, true);
                 if(is_dir($fileFolder)) {
                     file_put_contents($filename, $body);
                 }

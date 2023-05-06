@@ -11,5 +11,4 @@ public/_graphql
 /themes/bootswatcher/dist/js/*.min.js
 
 /data
-/bin
 /logs
