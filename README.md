@@ -7,3 +7,4 @@ Bootswatcher is a Bootstrap-5 based Silverstripe theme that wraps over 25 differ
 `composer create-project elliot-sawyer/bootswatcher my-app`
 
 This project is intended to be used with Silverstripe 5. Use the 1.0.0 tag if you need Silverstripe 4
+# bootswatcher-elements
