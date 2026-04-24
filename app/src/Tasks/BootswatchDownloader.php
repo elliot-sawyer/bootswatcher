@@ -2,14 +2,15 @@
 namespace Cashware\Bootswatcher;
 
 use GuzzleHttp\Client;
-use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Dev\BuildTask;
 use SilverStripe\ORM\DB;
+use Symfony\Component\Console\Input\InputInterface;
+use SilverStripe\Cli\PolyOutput;
 
 class BootswatchDownloader extends BuildTask
 {
     public $title = 'Bootswatch Downloader';
-    private static $segment = 'BootswatchDownloader';
+    protected static string $commandName = 'bootswatcher-download';
     private static $bootswatch_themes = [
         'default' => 'Default',
         'cerulean' => 'Cerulean',
@@ -42,10 +43,11 @@ class BootswatchDownloader extends BuildTask
     /**
      * Entry point for the build task — downloads all CSS themes and the Bootstrap JS bundle.
      */
-    public function run(HTTPRequest $request): void
+    protected function execute(InputInterface $input, PolyOutput $output): int
     {
         $this->getCSS();
         $this->getJS();
+        return 0;
     }
 
     /**
