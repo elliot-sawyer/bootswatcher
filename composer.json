@@ -1,20 +1,17 @@
 {
-    "name": "elliot-sawyer/bootswatcher",
+    "name": "elliotsawyer/bootswatcher",
     "type": "silverstripe-recipe",
-    "description": "Silverstripe project with Bootswatch themes preinstalled",
+    "description": "Silverstripe installer with Bootswatch theme picker — downloads all Bootswatch themes and exposes them as CMS-configurable choices via SiteConfig",
     "require": {
-        "php": "^8",
-        "silverstripe/recipe-cms": "5.0.0",
+        "php": "^8.3",
+        "silverstripe/recipe-cms": "^6",
+        "elliotsawyer/bootswatcher-theme": "^1",
         "guzzlehttp/guzzle": "^7"
     },
     "require-dev": {
         "larapack/dd": "^1.1"
     },
     "extra": {
-        "expose": [
-            "themes/bootswatcher/dist/css",
-            "themes/bootswatcher/dist/js"
-        ],
         "resources-dir": "_resources",
         "project-files-installed": [
             "app/.htaccess",

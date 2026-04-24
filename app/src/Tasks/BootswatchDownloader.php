@@ -2,6 +2,7 @@
 namespace Cashware\Bootswatcher;
 
 use GuzzleHttp\Client;
+use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Dev\BuildTask;
 use SilverStripe\ORM\DB;
 
@@ -38,36 +39,39 @@ class BootswatchDownloader extends BuildTask
         'zephyr' => 'Zephyr',
     ];
 
-    public function run($request) {
+    /**
+     * Entry point for the build task — downloads all CSS themes and the Bootstrap JS bundle.
+     */
+    public function run(HTTPRequest $request): void
+    {
         $this->getCSS();
         $this->getJS();
     }
 
-    public function getCSS() {
-        foreach($this->config()->bootswatch_themes as $theme => $name) {
+    /**
+     * Download each Bootswatch theme's minified CSS into the dist/css directory.
+     * Skips any file that already exists to avoid redundant network requests.
+     */
+    public function getCSS(): void
+    {
+        $fileFolder = $this->distPath('css');
+        $this->ensureDir($fileFolder);
+
+        foreach ($this->config()->bootswatch_themes as $theme => $name) {
             $client = new Client();
-            if($theme == 'default') {
+            if ($theme == 'default') {
                 $url = 'https://bootswatch.com/_vendor/bootstrap/dist/css/bootstrap.min.css';
             } else {
                 $url = sprintf("https://bootswatch.com/5/%s/bootstrap.min.css", $theme);
             }
 
-            $fileFolder = THEMES_PATH
-                . DIRECTORY_SEPARATOR
-                . 'bootswatcher'
-                . DIRECTORY_SEPARATOR
-                . 'dist'
-                . DIRECTORY_SEPARATOR
-                . 'css';
+            $filename = $fileFolder . DIRECTORY_SEPARATOR . $theme . '.min.css';
 
-            $filename = $fileFolder
-                . DIRECTORY_SEPARATOR
-                . $theme
-                . '.min.css';
+            if (file_exists($filename)) {
+                continue;
+            }
 
-            if(file_exists($filename)) continue;
-
-            DB::alteration_message('Downloading '.$name.' to '.$filename);
+            DB::alteration_message('Downloading ' . $name . ' to ' . $filename);
 
             $response = $client->request('GET', $url, [
                 'headers' => [
@@ -75,51 +79,64 @@ class BootswatchDownloader extends BuildTask
                 ]
             ]);
 
-            if($response && $response->getStatusCode() == 200) {
+            if ($response && $response->getStatusCode() == 200) {
                 $body = (string) $response->getBody();
-                if($body) {
-                    if(is_dir($fileFolder)) {
-                        file_put_contents($filename, $body);
-                    }
+                if ($body) {
+                    file_put_contents($filename, $body);
                 }
             }
         }
     }
 
-    public function getJS()
+    /**
+     * Download the Bootstrap JS bundle into the dist/js directory.
+     * Skips the download if the file already exists.
+     */
+    public function getJS(): void
     {
-        $client = new Client();
+        $fileFolder = $this->distPath('js');
+        $this->ensureDir($fileFolder);
+
+        $filename = $fileFolder . DIRECTORY_SEPARATOR . 'bootstrap.bundle.min.js';
+
+        if (file_exists($filename)) {
+            return;
+        }
+
         $url = 'https://cdn.jsdelivr.net/npm/bootstrap@5/dist/js/bootstrap.bundle.min.js';
-            $fileFolder = THEMES_PATH
-            . DIRECTORY_SEPARATOR
-            . 'bootswatcher'
-            . DIRECTORY_SEPARATOR
-            . 'dist'
-            . DIRECTORY_SEPARATOR
-            . 'js';
 
-        $filename = $fileFolder
-            . DIRECTORY_SEPARATOR
-            . 'bootstrap.bundle.min.js';
+        DB::alteration_message('Downloading ' . $filename);
 
-        if(file_exists($filename)) return;
-
-        DB::alteration_message('Downloading '.$filename);
-
+        $client = new Client();
         $response = $client->request('GET', $url, [
             'headers' => [
                 'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:94.0) Gecko/20100101 Firefox/111.0'
             ]
         ]);
 
-        if($response && $response->getStatusCode() == 200) {
+        if ($response && $response->getStatusCode() == 200) {
             $body = (string) $response->getBody();
-            if($body) {
-                @mkdir($fileFolder);
-                if(is_dir($fileFolder)) {
-                    file_put_contents($filename, $body);
-                }
+            if ($body) {
+                file_put_contents($filename, $body);
             }
+        }
+    }
+
+    /**
+     * Build the absolute path to a dist subdirectory within the bootswatcher theme.
+     */
+    private function distPath(string $type): string
+    {
+        return implode(DIRECTORY_SEPARATOR, [THEMES_PATH, 'bootswatcher', 'dist', $type]);
+    }
+
+    /**
+     * Create a directory (and any parents) if it does not already exist.
+     */
+    private function ensureDir(string $path): void
+    {
+        if (!is_dir($path)) {
+            mkdir($path, 0755, true);
         }
     }
 }
