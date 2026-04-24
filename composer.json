@@ -1,5 +1,5 @@
 {
-    "name": "elliot-sawyer/bootswatcher",
+    "name": "elliotsawyer/bootswatcher",
     "type": "silverstripe-recipe",
     "description": "Silverstripe project with Bootswatch themes preinstalled",
     "require": {
