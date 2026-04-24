@@ -10,7 +10,7 @@ use Symfony\Component\Console\Input\InputInterface;
 class BootswatchDownloader extends BuildTask
 {
     protected string $title = 'Bootswatch Downloader';
-    protected static string $commandName = 'bootswatcher-download';
+    protected static string $commandName = 'BootswatchDownloader';
     protected static string $description = 'Downloads Bootswatch theme CSS and Bootstrap JS into the bootswatcher theme dist directory';
 
     private static $bootswatch_themes = [
