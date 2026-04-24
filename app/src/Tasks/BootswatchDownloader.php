@@ -9,7 +9,7 @@ use SilverStripe\Cli\PolyOutput;
 
 class BootswatchDownloader extends BuildTask
 {
-    public $title = 'Bootswatch Downloader';
+    public string $title = 'Bootswatch Downloader';
     protected static string $commandName = 'bootswatcher-download';
     private static $bootswatch_themes = [
         'default' => 'Default',
