@@ -15,6 +15,7 @@ class BootswatchDownloader extends BuildTask
 
     private static $bootswatch_themes = [
         'default' => 'Default',
+        'brite' => 'Brite',
         'cerulean' => 'Cerulean',
         'cosmo' => 'Cosmo',
         'cyborg' => 'Cyborg',
