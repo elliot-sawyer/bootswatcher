@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a557e35788f2569c370f7cdb797f38aa",
+    "content-hash": "5840bfb5fec100ec275a8302c0b0eece",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -521,16 +521,16 @@
         },
         {
             "name": "elliotsawyer/bootswatcher-theme",
-            "version": "1.0.0-rc2",
+            "version": "1.0.0-rc3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/elliot-sawyer/bootswatcher-theme.git",
-                "reference": "20f6dd1b4487f1cbbe573ae1353a7785dd755bdb"
+                "reference": "e67635c0f0dede4894a38e4615a29ae50fa3e35a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/elliot-sawyer/bootswatcher-theme/zipball/20f6dd1b4487f1cbbe573ae1353a7785dd755bdb",
-                "reference": "20f6dd1b4487f1cbbe573ae1353a7785dd755bdb",
+                "url": "https://api.github.com/repos/elliot-sawyer/bootswatcher-theme/zipball/e67635c0f0dede4894a38e4615a29ae50fa3e35a",
+                "reference": "e67635c0f0dede4894a38e4615a29ae50fa3e35a",
                 "shasum": ""
             },
             "require": {
@@ -552,9 +552,9 @@
             "description": "Bootstrap 5 Silverstripe theme with support for Bootswatch theme switching. Includes the default Bootstrap stylesheet out of the box. Install elliotsawyer/bootswatcher for full CMS-based theme picking.",
             "support": {
                 "issues": "https://github.com/elliot-sawyer/bootswatcher-theme/issues",
-                "source": "https://github.com/elliot-sawyer/bootswatcher-theme/tree/1.0.0-rc2"
+                "source": "https://github.com/elliot-sawyer/bootswatcher-theme/tree/1.0.0-rc3"
             },
-            "time": "2026-04-24T10:44:26+00:00"
+            "time": "2026-04-24T11:33:44+00:00"
         },
         {
             "name": "embed/embed",
