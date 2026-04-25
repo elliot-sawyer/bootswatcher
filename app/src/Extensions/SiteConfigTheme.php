@@ -1,8 +1,8 @@
 <?php
 namespace Cashware\Bootswatcher;
 
+use Cashware\Bootswatcher\Forms\BootswatchThemeField;
 use SilverStripe\Core\Extension;
-use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\View\Requirements;
 
@@ -18,7 +18,7 @@ class SiteConfigTheme extends Extension
     public function updateCMSFields(FieldList $fields): void
     {
         $fields->addFieldsToTab('Root.Theme', [
-            DropdownField::create('Theme', 'Bootswatch Theme')
+            BootswatchThemeField::create('Theme', 'Bootswatch Theme')
                 ->setSource(BootswatchDownloader::config()->bootswatch_themes)
         ]);
     }
@@ -39,6 +39,7 @@ class SiteConfigTheme extends Extension
         $task = new BootswatchDownloader();
         $task->getCSS();
         $task->getJS();
+        $task->getThumbnails();
     }
 
     /**
@@ -46,12 +47,10 @@ class SiteConfigTheme extends Extension
      */
     public function onBeforeWrite(): void
     {
-        $themes = array_keys(BootswatchDownloader::config()->bootswatch_themes);
-        shuffle($themes);
-        $theme = array_shift($themes);
-
-        if ($this->owner->Theme == 'default') {
-            $this->owner->Theme = $theme;
+        if (!$this->owner->isInDB() && $this->owner->Theme === 'default') {
+            $themes = array_keys(BootswatchDownloader::config()->bootswatch_themes);
+            shuffle($themes);
+            $this->owner->Theme = array_shift($themes);
         }
     }
 }

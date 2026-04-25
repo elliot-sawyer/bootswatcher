@@ -50,6 +50,7 @@ class BootswatchDownloader extends BuildTask
     {
         $this->getCSS();
         $this->getJS();
+        $this->getThumbnails();
         return 0;
     }
 
@@ -123,6 +124,44 @@ class BootswatchDownloader extends BuildTask
             $body = (string) $response->getBody();
             if ($body) {
                 file_put_contents($filename, $body);
+            }
+        }
+    }
+
+    /**
+     * Download each Bootswatch theme's preview thumbnail into the dist/img directory.
+     * Skips any file that already exists. The default Bootstrap theme has no Bootswatch thumbnail.
+     */
+    public function getThumbnails(): void
+    {
+        $fileFolder = $this->distPath('img');
+        $this->ensureDir($fileFolder);
+
+        $client = new Client();
+        foreach ($this->config()->bootswatch_themes as $theme => $name) {
+            if ($theme === 'default') {
+                continue;
+            }
+
+            $filename = $fileFolder . DIRECTORY_SEPARATOR . $theme . '.png';
+            if (file_exists($filename)) {
+                continue;
+            }
+
+            $url = sprintf('https://bootswatch.com/%s/thumbnail.png', $theme);
+            DB::alteration_message('Downloading thumbnail for ' . $name);
+
+            $response = $client->request('GET', $url, [
+                'headers' => [
+                    'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:94.0) Gecko/20100101 Firefox/111.0'
+                ]
+            ]);
+
+            if ($response && $response->getStatusCode() === 200) {
+                $body = (string) $response->getBody();
+                if ($body) {
+                    file_put_contents($filename, $body);
+                }
             }
         }
     }

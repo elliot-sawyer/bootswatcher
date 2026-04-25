@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5840bfb5fec100ec275a8302c0b0eece",
+    "content-hash": "bfe886fb335ae0b7b2aaf9413913164e",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -521,16 +521,16 @@
         },
         {
             "name": "elliotsawyer/bootswatcher-theme",
-            "version": "1.0.0-rc3",
+            "version": "dev-feature/thumbnail-picker",
             "source": {
                 "type": "git",
                 "url": "https://github.com/elliot-sawyer/bootswatcher-theme.git",
-                "reference": "e67635c0f0dede4894a38e4615a29ae50fa3e35a"
+                "reference": "656a26eb06d9da97479152738830167312c5bb1d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/elliot-sawyer/bootswatcher-theme/zipball/e67635c0f0dede4894a38e4615a29ae50fa3e35a",
-                "reference": "e67635c0f0dede4894a38e4615a29ae50fa3e35a",
+                "url": "https://api.github.com/repos/elliot-sawyer/bootswatcher-theme/zipball/656a26eb06d9da97479152738830167312c5bb1d",
+                "reference": "656a26eb06d9da97479152738830167312c5bb1d",
                 "shasum": ""
             },
             "require": {
@@ -544,7 +544,8 @@
             "extra": {
                 "expose": [
                     "dist/css",
-                    "dist/js"
+                    "dist/js",
+                    "dist/img"
                 ],
                 "installer-name": "bootswatcher"
             },
@@ -552,9 +553,9 @@
             "description": "Bootstrap 5 Silverstripe theme with support for Bootswatch theme switching. Includes the default Bootstrap stylesheet out of the box. Install elliotsawyer/bootswatcher for full CMS-based theme picking.",
             "support": {
                 "issues": "https://github.com/elliot-sawyer/bootswatcher-theme/issues",
-                "source": "https://github.com/elliot-sawyer/bootswatcher-theme/tree/1.0.0-rc3"
+                "source": "https://github.com/elliot-sawyer/bootswatcher-theme/tree/feature/thumbnail-picker"
             },
-            "time": "2026-04-24T11:33:44+00:00"
+            "time": "2026-04-25T06:44:45+00:00"
         },
         {
             "name": "embed/embed",
@@ -6169,9 +6170,18 @@
             "time": "2026-03-30T13:44:50+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "package": "elliotsawyer/bootswatcher-theme",
+            "version": "dev-feature/thumbnail-picker",
+            "alias": "1.0.0",
+            "alias_normalized": "1.0.0.0"
+        }
+    ],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "elliotsawyer/bootswatcher-theme": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

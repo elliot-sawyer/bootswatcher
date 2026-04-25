@@ -5,7 +5,7 @@
     "require": {
         "php": "^8.3",
         "silverstripe/recipe-cms": "^6",
-        "elliotsawyer/bootswatcher-theme": "1.0.0-rc3",
+        "elliotsawyer/bootswatcher-theme": "dev-feature/thumbnail-picker as 1.0.0",
         "guzzlehttp/guzzle": "^7"
     },
     "require-dev": {
