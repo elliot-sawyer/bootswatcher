@@ -32,7 +32,7 @@ class BootswatchThemeField extends DropdownField
                 'Key'       => $key,
                 'Label'     => $label,
                 'Selected'  => (string) $key === $current,
-                'Thumbnail' => $key !== 'default' ? $this->localThumbnailURL($key) : null,
+                'Thumbnail' => $this->localThumbnailURL($key),
             ]));
         }
 
@@ -55,7 +55,7 @@ class BootswatchThemeField extends DropdownField
     public function getCurrentThumbnail(): ?string
     {
         $value = (string) $this->getValue();
-        if (!$value || $value === 'default') {
+        if (!$value) {
             return null;
         }
         return $this->localThumbnailURL($value);
@@ -67,7 +67,8 @@ class BootswatchThemeField extends DropdownField
      */
     private function localThumbnailURL(string $theme): string
     {
-        return Director::baseURL() . '_resources/themes/bootswatcher/dist/img/' . $theme . '.png';
+        $ext = $theme === 'default' ? 'svg' : 'png';
+        return Director::baseURL() . '_resources/themes/bootswatcher/dist/img/' . $theme . '.' . $ext;
     }
 
     private function pickerCSS(): string
@@ -78,14 +79,14 @@ class BootswatchThemeField extends DropdownField
 .bootswatch-trigger:focus{outline:2px solid #0d6efd;outline-offset:2px}
 .bootswatch-trigger-caret{margin-left:auto;font-style:normal}
 .bootswatch-thumb-sm{width:48px;height:auto;border-radius:2px;flex-shrink:0}
-.bootswatch-options{position:absolute;top:calc(100% + 4px);left:0;z-index:1050;background:#fff;border:1px solid #ced4da;border-radius:4px;list-style:none;margin:0;padding:6px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;min-width:480px;max-height:420px;overflow-y:auto;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.bootswatch-options{position:absolute;top:calc(100% + 4px);left:0;z-index:1050;background:#fff;border:1px solid #ced4da;border-radius:4px;list-style:none;margin:0;padding:6px;display:flex;flex-direction:column;gap:4px;min-width:480px;max-height:520px;overflow-y:auto;box-shadow:0 4px 12px rgba(0,0,0,.15)}
 .bootswatch-options[hidden]{display:none}
-.bootswatch-option{display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px;cursor:pointer;border:2px solid transparent;border-radius:4px;text-align:center}
+.bootswatch-option{display:flex;flex-direction:row;align-items:center;gap:12px;padding:6px 8px;cursor:pointer;border:2px solid transparent;border-radius:4px}
 .bootswatch-option:hover{background:#f0f4ff}
 .bootswatch-option--selected{border-color:#0d6efd;background:#e7f1ff}
 .bootswatch-option:focus{outline:2px solid #0d6efd;outline-offset:2px}
-.bootswatch-thumb{width:100%;max-width:128px;height:auto;border:1px solid #dee2e6;border-radius:2px}
-.bootswatch-option-label{font-size:.75rem;line-height:1.2}
+.bootswatch-thumb{width:240px;height:auto;flex-shrink:0;border:1px solid #dee2e6;border-radius:2px}
+.bootswatch-option-label{font-size:.9rem;line-height:1.2}
 CSS;
     }
 
@@ -176,8 +177,14 @@ CSS;
     }
 
     function setup() {
-        document.querySelectorAll('.bootswatch-picker').forEach(init);
+        document.querySelectorAll('.bootswatch-picker:not([data-bw-init])').forEach(function (picker) {
+            picker.setAttribute('data-bw-init', '1');
+            init(picker);
+        });
     }
+
+    var observer = new MutationObserver(setup);
+    observer.observe(document.body || document.documentElement, { childList: true, subtree: true });
 
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', setup);

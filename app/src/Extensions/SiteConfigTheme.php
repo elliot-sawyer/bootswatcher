@@ -47,12 +47,10 @@ class SiteConfigTheme extends Extension
      */
     public function onBeforeWrite(): void
     {
-        $themes = array_keys(BootswatchDownloader::config()->bootswatch_themes);
-        shuffle($themes);
-        $theme = array_shift($themes);
-
-        if ($this->owner->Theme == 'default') {
-            $this->owner->Theme = $theme;
+        if (!$this->owner->isInDB() && $this->owner->Theme === 'default') {
+            $themes = array_keys(BootswatchDownloader::config()->bootswatch_themes);
+            shuffle($themes);
+            $this->owner->Theme = array_shift($themes);
         }
     }
 }
