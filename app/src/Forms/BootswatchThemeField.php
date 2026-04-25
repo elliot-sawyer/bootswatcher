@@ -24,7 +24,7 @@ class BootswatchThemeField extends DropdownField
      */
     public function getThemeOptions(): ArrayList
     {
-        $current = (string) $this->Value();
+        $current = (string) $this->getValue();
         $options  = ArrayList::create();
 
         foreach ($this->getSource() as $key => $label) {
@@ -45,7 +45,7 @@ class BootswatchThemeField extends DropdownField
     public function getCurrentLabel(): string
     {
         $source = $this->getSource();
-        $value  = $this->Value();
+        $value  = $this->getValue();
         return $source[$value] ?? '';
     }
 
@@ -54,7 +54,7 @@ class BootswatchThemeField extends DropdownField
      */
     public function getCurrentThumbnail(): ?string
     {
-        $value = (string) $this->Value();
+        $value = (string) $this->getValue();
         if (!$value || $value === 'default') {
             return null;
         }
