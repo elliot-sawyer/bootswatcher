@@ -3,8 +3,8 @@ namespace Cashware\Bootswatcher\Forms;
 
 use SilverStripe\Control\Director;
 use SilverStripe\Forms\DropdownField;
-use SilverStripe\ORM\ArrayList;
-use SilverStripe\View\ArrayData;
+use SilverStripe\Model\ArrayData;
+use SilverStripe\Model\List\ArrayList;
 use SilverStripe\View\Requirements;
 
 class BootswatchThemeField extends DropdownField
