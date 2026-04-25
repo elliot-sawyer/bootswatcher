@@ -1,0 +1,6 @@
+---
+Name: bootswatcher-styleguide
+---
+SilverStripe\Control\Director:
+  rules:
+    'dev/styleguide': 'Cashware\Bootswatcher\Dev\StyleguideController'
