@@ -1,0 +1,28 @@
+{
+    "name": "elliotsawyer/bootswatcher-theme",
+    "type": "silverstripe-theme",
+    "description": "Bootstrap 5 Silverstripe theme with support for Bootswatch theme switching. Includes the default Bootstrap stylesheet out of the box. Install elliotsawyer/bootswatcher for full CMS-based theme picking.",
+    "require": {
+        "php": "^8.3",
+        "silverstripe/framework": "^6"
+    },
+    "suggest": {
+        "elliotsawyer/bootswatcher": "Provides CMS-based Bootswatch theme switching and automatic CSS/JS download via dev/build"
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true,
+            "silverstripe/vendor-plugin": true
+        }
+    },
+    "extra": {
+        "installer-name": "bootswatcher",
+        "expose": [
+            "dist/css",
+            "dist/js",
+            "dist/img"
+        ]
+    },
+    "prefer-stable": true,
+    "minimum-stability": "dev"
+}

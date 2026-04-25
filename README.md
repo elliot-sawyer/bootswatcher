@@ -29,6 +29,17 @@ composer require elliotsawyer/bootswatcher-theme
 
 The theme ships with the default Bootstrap stylesheet and works out of the box. Run `composer require elliotsawyer/bootswatcher` afterwards to add CMS-based theme switching.
 
+## Styleguide
+
+Bootswatcher exposes a styleguide route at `/dev/styleguide` that renders a full Bootstrap component kitchen sink — buttons, typography, tables, forms, navs, badges, alerts, modals, and more — styled with the currently active Bootswatch theme.
+
+Access is restricted to authenticated CMS users (`CMS_ACCESS_LeftAndMain`). Unauthenticated visitors are redirected to the login page.
+
+This is useful for:
+- Previewing how a theme renders standard Bootstrap components before committing to it
+- QA-ing template changes against multiple themes
+- Giving designers a reference page without needing a populated site
+
 ## Silverstripe version support
 
 | Bootswatcher | Silverstripe |
