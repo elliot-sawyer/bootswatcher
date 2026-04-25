@@ -6,8 +6,6 @@ use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Control\HTTPResponse;
 use SilverStripe\Security\Permission;
 use SilverStripe\Security\Security;
-use SilverStripe\SiteConfig\SiteConfig;
-use SilverStripe\View\Requirements;
 
 class StyleguideController extends Controller
 {
@@ -21,15 +19,7 @@ class StyleguideController extends Controller
             return Security::permissionFailure($this);
         }
 
-        $config = SiteConfig::current_site_config();
-        $config->BootswatchTheme();
-
-        Requirements::themedCSS('dist/css/default.min');
-
-        return $this->renderWith([
-            'Cashware/Bootswatcher/Dev/Styleguide',
-            'Page',
-        ]);
+        return $this->renderWith('Cashware/Bootswatcher/Dev/Styleguide');
     }
 
     public function getTitle(): string
