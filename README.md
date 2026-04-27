@@ -8,18 +8,20 @@ This project is split into two Composer packages:
 
 | Package | Type | Description |
 |---|---|---|
-| [`elliotsawyer/bootswatcher`](https://github.com/elliot-sawyer/bootswatcher) | `silverstripe-recipe` | Installer — includes the CMS extension and build task that downloads Bootswatch themes |
-| [`elliotsawyer/bootswatcher-theme`](https://github.com/elliot-sawyer/bootswatcher-theme) | `silverstripe-theme` | Theme — Bootstrap 5 templates, detectable on [ssmods.com](https://ssmods.com) |
+| [`elliotsawyer/bootswatcher`](https://github.com/elliot-sawyer/bootswatcher) | `silverstripe-recipe` | Installer - includes the CMS extension and build task that downloads Bootswatch themes |
+| [`elliotsawyer/bootswatcher-theme`](https://github.com/elliot-sawyer/bootswatcher-theme) | `silverstripe-theme` | Theme - Bootstrap 5 templates, detectable on [ssmods.com](https://ssmods.com) |
 
 The theme package can be installed standalone and ships with the default Bootstrap stylesheet. Install the full installer to get CMS-based theme switching.
 
 ## Installation
 
-```bash
-composer create-project elliotsawyer/bootswatcher my-app
-```
+1. `composer create-project elliot-sawyer/bootswatcher my-app`
+2. `vendor/bin/sake dev/build`
+3. `vendor/bin/sake dev/tasks/BootswatchDownloader`
 
-This installs Silverstripe 6 with the Bootswatch theme picker ready to go. On `dev/build`, all Bootswatch theme stylesheets and the Bootstrap JS bundle are downloaded automatically into the theme's `dist/` directory.
+This project is intended to be used with Silverstripe 6. Use the 2.x branch for Silverstripe 5
+
+This installs Silverstripe 6 with the Bootswatch theme picker ready to go. Bootswatch theme stylesheets and the Bootstrap JS bundle are downloaded with the BootswatchDownloader task into the theme's `dist/` directory.
 
 ### Installing the theme only
 
@@ -27,11 +29,11 @@ This installs Silverstripe 6 with the Bootswatch theme picker ready to go. On `d
 composer require elliotsawyer/bootswatcher-theme
 ```
 
-The theme ships with the default Bootstrap stylesheet and works out of the box. Run `composer require elliotsawyer/bootswatcher` afterwards to add CMS-based theme switching.
+The theme ships with the default Bootstrap stylesheet and works out of the box. Run `composer require elliotsawyer/bootswatcher` afterwards to add CMS-based theme switching. Using this method, you won't get the downloader, theme picker, or the dev stylesheet.
 
 ## Styleguide
 
-Bootswatcher exposes a styleguide route at `/dev/styleguide` that renders a full Bootstrap component kitchen sink — buttons, typography, tables, forms, navs, badges, alerts, modals, and more — styled with the currently active Bootswatch theme.
+Bootswatcher exposes a styleguide route at `/dev/styleguide` that renders a full Bootstrap component kitchen sink - buttons, typography, tables, forms, navs, badges, alerts, modals, and more - styled with the currently active Bootswatch theme.
 
 Access is restricted to authenticated CMS users (`CMS_ACCESS_LeftAndMain`). Unauthenticated visitors are redirected to the login page.
 
@@ -53,3 +55,13 @@ This is useful for:
 | bootswatcher-theme | Silverstripe |
 |---|---|
 | `1.x` | 6 |
+
+## Support
+
+Like my work? Consider shouting me a coffee or a small donation if this module helped you solve a problem. I accept cryptocurrency at the following addresses:
+
+* Bitcoin: 12gSxkqVNr9QMLQMMJdWemBaRRNPghmS3p
+* Bitcoin Cash: 1QETPtssFRM981TGjVg74uUX8kShcA44ni
+* Litecoin: LbyhaTESx3uQvwwd9So4sGSpi4tTJLKBdz
+
+Paid support is available. Please get in touch at https://sawyer.nz/contact
