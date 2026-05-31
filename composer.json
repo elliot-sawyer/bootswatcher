@@ -1,34 +1,26 @@
 {
     "name": "elliotsawyer/bootswatcher",
-    "type": "silverstripe-recipe",
-    "description": "Silverstripe project with Bootswatch themes preinstalled",
+    "type": "silverstripe-module",
+    "description": "Silverstripe module with Bootswatch themes preinstalled",
     "require": {
         "php": "^8",
-        "silverstripe/recipe-cms": "5.0.0",
+        "silverstripe/cms": "^5 || ^6",
         "guzzlehttp/guzzle": "^7"
     },
     "require-dev": {
         "larapack/dd": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Cashware\\Bootswatcher\\": "app/src/"
+        }
     },
     "extra": {
         "expose": [
             "themes/bootswatcher/dist/css",
             "themes/bootswatcher/dist/js"
         ],
-        "resources-dir": "_resources",
-        "project-files-installed": [
-            "app/.htaccess",
-            "app/_config.php",
-            "app/_config/mimevalidator.yml",
-            "app/_config/app.yml",
-            "app/src/Page.php",
-            "app/src/PageController.php"
-        ],
-        "public-files-installed": [
-            ".htaccess",
-            "index.php",
-            "web.config"
-        ]
+        "resources-dir": "_resources"
     },
     "config": {
         "process-timeout": 600,
